@@ -20,8 +20,8 @@ WORKDIR /workdir
 COPY pyproject.toml pdm.lock* Makefile .
 RUN make install-tools && pdm config python.use_venv false && make pdm-lock-check install-deps
 
-COPY ocp-product-docs-plaintext ./ocp-product-docs-plaintext
-COPY runbooks ./runbooks
+COPY rhdh-product-docs-plaintext ./rhdh-product-docs-plaintext
+# COPY runbooks ./runbooks
 
 COPY scripts/download_embeddings_model.py .
 RUN pdm run python download_embeddings_model.py -l ./embeddings_model -r ${EMBEDDING_MODEL}
@@ -30,15 +30,16 @@ RUN export LD_LIBRARY_PATH=/usr/local/cuda-12.6/compat:$LD_LIBRARY_PATH; \
     pdm run python -c "import torch; print(torch.version.cuda); print(torch.cuda.is_available());"
 
 COPY scripts/generate_embeddings.py .
+COPY scripts/common_embeddings.py .
 RUN export LD_LIBRARY_PATH=/usr/local/cuda-12.6/compat:$LD_LIBRARY_PATH; \
-    set -e && for OCP_VERSION in $(ls -1 ocp-product-docs-plaintext); do \
-        pdm run python generate_embeddings.py -f ocp-product-docs-plaintext/${OCP_VERSION} -r runbooks/alerts -md embeddings_model \
-            -mn ${EMBEDDING_MODEL} -o vector_db/ocp_product_docs/${OCP_VERSION} \
-            -i ocp-product-docs-$(echo $OCP_VERSION | sed 's/\./_/g') -v ${OCP_VERSION}; \
+    set -e && for RHDH_VERSION in $(ls -1 rhdh-product-docs-plaintext); do \
+        pdm run python generate_embeddings.py -f rhdh-product-docs-plaintext/${RHDH_VERSION} -md embeddings_model \
+            -mn ${EMBEDDING_MODEL} -o vector_db/rhdh_product_docs/${RHDH_VERSION} \
+            -i rhdh-product-docs-$(echo $RHDH_VERSION | sed 's/\./_/g') -v ${RHDH_VERSION}; \
     done
 
 FROM registry.access.redhat.com/ubi9/ubi-minimal@sha256:c0e70387664f30cd9cf2795b547e4a9a51002c44a4a86aa9335ab030134bf392
-COPY --from=lightspeed-rag-builder /workdir/vector_db/ocp_product_docs /rag/vector_db/ocp_product_docs
+COPY --from=lightspeed-rag-builder /workdir/vector_db/rhdh_product_docs /rag/vector_db/rhdh_product_docs
 COPY --from=lightspeed-rag-builder /workdir/embeddings_model /rag/embeddings_model
 
 # this directory is checked by ecosystem-cert-preflight-checks task in Konflux

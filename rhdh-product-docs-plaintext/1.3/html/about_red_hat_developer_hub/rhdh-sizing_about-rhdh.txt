@@ -1,0 +1,4 @@
+# Sizing requirements for Red Hat Developer Hub
+
+Scaling the Red Hat Developer Hub requires significant resource allocation. The following table lists the sizing requirements for installing and running Red Hat Developer Hub, including Developer Hub application, database components, and Operator.
+

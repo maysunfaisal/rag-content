@@ -23,8 +23,8 @@ from common_embeddings import (
     print_unreachable_docs_warning
 )
 
-OCP_DOCS_ROOT_URL = "https://docs.openshift.com/container-platform/"
-OCP_DOCS_VERSION = "4.15"
+OCP_DOCS_ROOT_URL = "https://docs.redhat.com/en/documentation/red_hat_developer_hub/"
+OCP_DOCS_VERSION = "1.3"
 RUNBOOKS_ROOT_URL = "https://github.com/openshift/runbooks/blob/master/alerts"
 
 
@@ -73,9 +73,9 @@ if __name__ == "__main__":
     EMBEDDINGS_ROOT_DIR = os.path.abspath(args.folder)
     if EMBEDDINGS_ROOT_DIR.endswith("/"):
         EMBEDDINGS_ROOT_DIR = EMBEDDINGS_ROOT_DIR[:-1]
-    RUNBOOKS_ROOT_DIR = os.path.abspath(args.runbooks)
-    if RUNBOOKS_ROOT_DIR.endswith("/"):
-        RUNBOOKS_ROOT_DIR = RUNBOOKS_ROOT_DIR[:-1]
+    # RUNBOOKS_ROOT_DIR = os.path.abspath(args.runbooks)
+    # if RUNBOOKS_ROOT_DIR.endswith("/"):
+    #     RUNBOOKS_ROOT_DIR = RUNBOOKS_ROOT_DIR[:-1]
 
     OCP_DOCS_VERSION = args.ocp_version
 
@@ -95,16 +95,16 @@ if __name__ == "__main__":
     # Filter out invalid nodes
     good_nodes = filter_out_invalid_nodes(nodes)
 
-    # Load runbook documents
-    runbook_documents = process_documents(
-        args.runbooks, metadata_func=runbook_file_metadata_func,
-        required_exts=['.md',], file_extractor={".md": FlatReader()})
+    # # Load runbook documents
+    # runbook_documents = process_documents(
+    #     args.runbooks, metadata_func=runbook_file_metadata_func,
+    #     required_exts=['.md',], file_extractor={".md": FlatReader()})
 
-    # Create chunks/nodes
-    runbook_nodes = settings.text_splitter.get_nodes_from_documents(runbook_documents)
+    # # Create chunks/nodes
+    # runbook_nodes = settings.text_splitter.get_nodes_from_documents(runbook_documents)
 
-    # Extend nodes with runbook_nodes
-    good_nodes.extend(runbook_nodes)
+    # # Extend nodes with runbook_nodes
+    # good_nodes.extend(runbook_nodes)
 
     # Create & save Index
     save_index(good_nodes, storage_context, args.index, PERSIST_FOLDER)

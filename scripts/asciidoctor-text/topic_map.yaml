@@ -1,0 +1,46 @@
+# trunk-ignore-all(prettier)
+# This configuration file dictates the organization of the topic groups and
+# topics on the main page of the doc site for this branch. Each record
+# consists of the following:
+#
+# ---                                  <= Record delimiter
+# Name: Origin of the Species          <= Display name of topic group
+# Dir:  origin_of_the_species          <= Directory name of topic group
+# Topics:
+#   - Name: The Majestic Marmoset      <= Topic name
+#     File: the_majestic_marmoset      <= Topic file under group dir +/-
+#   - Name: The Curious Crocodile      <= Topic 2 name
+#     File: the_curious_crocodile      <= Topic 2 file
+#   - Name: The Numerous Nematodes     <= Sub-topic group name
+#     Dir: the_numerous_nematodes      <= Sub-topic group dir
+#     Topics:
+#       - Name: The Wily Worm          <= Sub-topic name
+#         File: the_wily_worm          <= Sub-topic file under <group dir>/<subtopic dir>
+#       - Name: The Acrobatic Ascarid  <= Sub-topic 2 name
+#         File: the_acrobatic_ascarid  <= Sub-topic 2 file under <group dir>/<subtopic dir>
+#
+# The ordering of the records in this document determines the ordering of the
+# topic groups and topics on the main page.
+
+---
+Name: Modules
+Dir: modules
+Topics:
+- Name: About
+  Dir: about
+  Topics:
+  - Name: Benefits
+    File: con-benefits-of-rhdh
+  - Name: Integration
+    File: con-integrations-in-rhdh
+  - Name: Sizing
+    File: ref-rhdh-sizing
+- Name: Templates
+  Dir: templates
+  Topics:
+  - Name: Adding Templates
+    File: proc-adding-templates
+  - Name: Creating Tempaltes with Editor
+    File: proc-creating-templates
+  - Name: Creating Templates as a YAML file
+    File: ref-creating-templates

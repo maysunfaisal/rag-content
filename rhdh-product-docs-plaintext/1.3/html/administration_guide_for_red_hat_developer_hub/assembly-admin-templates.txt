@@ -1,0 +1,134 @@
+# Creating a template by using the Template Editor
+
+You can create a template by using the Template Editor.
+
+1. Access the Template Editor by using one of the following options:
+![Template Editor]
+* Open the URL \https://<rhdh_url>/create/edit for your Red Hat Developer Hub instance.
+* Click Create&#8230;&#8203; in the navigation menu of the Red Hat Developer Hub console, then click the overflow menu button and select Template editor.
+2. Click Edit Template Form.
+3. Optional: Modify the YAML definition for the parameters of your template. For more information about these parameters, see .
+4. In the Name * field, enter a unique name for your template.
+5. From the Owner drop-down menu, choose an owner for the template.
+6. Click Next.
+7. In the Repository Location view, enter the following information about the hosted repository that you want to publish the template to:
+1. Select an available Host from the drop-down menu.
+
+[NOTE]
+----
+Available hosts are defined in the YAML parameters by the allowedHosts field:
+
+```yaml
+# ...
+        ui:options:
+          allowedHosts:
+            - github.com
+# ...
+```
+
+----
+2. In the Owner * field, enter an organization, user or project that the hosted repository belongs to.
+3. In the Repository * field, enter the name of the hosted repository.
+4. Click Review.
+8. Review the information for accuracy, then click Create.
+
+1. Click the Catalog tab in the navigation panel.
+2. In the Kind drop-down menu, select Template.
+3. Confirm that your template is shown in the list of existing templates.
+
+# Creating a template as a YAML file
+
+You can create a template by defining a Template object as a YAML file.
+
+The Template object describes the template and its metadata. It also contains required input variables and a list of actions that are executed by the scaffolding service.
+
+
+```yaml
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: template-name 1
+  title: Example template 2
+  description: An example template for v1beta3 scaffolder. 3
+spec:
+  owner: backstage/techdocs-core 4
+  type: service 5
+  parameters: 6
+    - title: Fill in some steps
+      required:
+        - name
+      properties:
+        name:
+          title: Name
+          type: string
+          description: Unique name of the component
+        owner:
+          title: Owner
+          type: string
+          description: Owner of the component
+    - title: Choose a location
+      required:
+        - repoUrl
+      properties:
+        repoUrl:
+          title: Repository Location
+          type: string
+  steps: 7
+    - id: fetch-base
+      name: Fetch Base
+      action: fetch:template
+      # ...
+  output: 8
+    links:
+      - title: Repository 9
+        url: ${{ steps['publish'].output.remoteUrl }}
+      - title: Open in catalog 10
+        icon: catalog
+        entityRef: ${{ steps['register'].output.entityRef }}
+# ...
+```
+
+
+Specify a name for the template.
+Specify a title for the template. This is the title that is visible on the template tile in the Create&#8230;&#8203; view.
+Specify a description for the template. This is the description that is visible on the template tile in the Create&#8230;&#8203; view.
+Specify the ownership of the template. The owner field provides information about who is responsible for maintaining or overseeing the template within the system or organization. In the provided example, the owner field is set to backstage/techdocs-core. This means that this template belongs to the techdocs-core project in the backstage namespace.
+Specify the component type. Any string value is accepted for this required field, but your organization should establish a proper taxonomy for these. Red Hat Developer Hub instances may read this field and behave differently depending on its value. For example, a website type component may present tooling in the Red Hat Developer Hub interface that is specific to just websites.
+
+The following values are common for this field:
+service:: A backend service, typically exposing an API.
+website:: A website.
+library:: A software library, such as an npm module or a Java library.
+Use the parameters section to specify parameters for user input that are shown in a form view when a user creates a component by using the template in the Red Hat Developer Hub console. Each parameters subsection, defined by a title and properties, creates a new form page with that definition.
+Use the steps section to specify steps that are executed in the backend. These steps must be defined by using a unique step ID, a name, and an action. You can view actions that are available on your Red Hat Developer Hub instance by visiting the URL \https://<rhdh_url>/create/actions.
+Use the output section to specify the structure of output data that is created when the template is used. The output section, particularly the links subsection, provides valuable references and URLs that users can utilize to access and interact with components that are created from the template.
+Provides a reference or URL to the repository associated with the generated component.
+Provides a reference or URL that allows users to open the generated component in a catalog or directory where various components are listed.
+
+# Importing an existing template to Red Hat Developer Hub
+
+You can add an existing template to your Red Hat Developer Hub instance by using the Catalog Processor.
+
+* You have created a directory or repository that contains at least one template YAML file.
+* If you want to use a template that is stored in a repository such as GitHub or GitLab, you must configure a Red Hat Developer Hub integration for your provider.
+
+* In the app-config.yaml configuration file, modify the catalog.rules section to include a rule for templates, and configure the catalog.locations section to point to the template that you want to add, as shown in the following example:
+
+```yaml
+# ...
+catalog:
+  rules:
+    - allow: [Template] 1
+  locations:
+    - type: url 2
+      target: https://<repository_url>/example-template.yaml 3
+# ...
+```
+
+To allow new templates to be added to the catalog, you must add a Template rule.
+If you are importing templates from a repository, such as GitHub or GitLab, use the url type.
+Specify the URL for the template.
+
+1. Click the Catalog tab in the navigation panel.
+2. In the Kind drop-down menu, select Template.
+3. Confirm that your template is shown in the list of existing templates.

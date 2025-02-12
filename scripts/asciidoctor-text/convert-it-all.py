@@ -47,7 +47,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--distro",
         "-d",
-        required=True,
+        # required=True,
         help="OpenShift distro the docs are for, ex. openshift-enterprise",
     )
     parser.add_argument(
