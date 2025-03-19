@@ -6,16 +6,8 @@ import argparse
 import os
 import subprocess
 import sys
-import shutil
 import requests
 import yaml
-
-from git import Repo
-
-
-# def node_in_distro(node: dict, distro: str) -> bool:
-#     """Check if a node is in a distro."""
-#     return node.get("Distros", "") == "" or distro in node.get("Distros", "").split(",")
 
 
 def process_node(node: dict, dir: str = "", file_list: list = []) -> list:
@@ -32,22 +24,12 @@ def process_node(node: dict, dir: str = "", file_list: list = []) -> list:
     return file_list
 
 
-def convert_to_txt(repo: str, output_dir: str, topic_map_url: str, attributes_url: str) -> None:
+def convert_to_txt(repo_dir: str, output_dir: str, topic_map_url: str, attributes_url: str) -> None:
     """Process YAML node from the topic map."""
 
-    repo_dir = "red-hat-developers-documentation-rhdh"
     topic_map = "rhdh_topic_map.yaml"
     attributes = "rhdh_attributes.yaml"
 
-    try:
-        shutil.rmtree(repo_dir)
-        Repo.clone_from(repo, repo_dir, branch="main")
-    except Exception:
-        print("error deleting " + repo_dir + " and git cloning repository " + repo)
-
-
-    # urllib.request.urlretrieve(topic_map_url, topic_map)
-    # urllib.request.urlretrieve(attributes_url, attributes)
     response = requests.get(topic_map_url)
     if response.status_code == 200:
         with open(topic_map, "wb") as file:
@@ -120,10 +102,10 @@ if __name__ == "__main__":
     # print(sysconfig.get_paths()["purelib"])
 
     parser.add_argument(
-        "--repo",
+        "--repo-dir",
         "-r",
         required=True,
-        help="repo to fetch",
+        help="cloned repo path",
     )
     parser.add_argument("--topic-map", "-t", required=True, help="The topic map file")
     parser.add_argument(
@@ -134,4 +116,4 @@ if __name__ == "__main__":
     )
 
     args = parser.parse_args(sys.argv[1:])
-    convert_to_txt(args.repo, args.output_dir, args.topic_map, args.attributes)
+    convert_to_txt(args.repo_dir, args.output_dir, args.topic_map, args.attributes)
