@@ -13,7 +13,7 @@ You can store the configuration for dynamic plugins in a ConfigMap object that y
 
 [NOTE]
 ----
-If the pluginConfig field references environment variables, you must define the variables in your my-rhdh-secrets secret.
+If the pluginConfig field references environment variables, you must define the variables in your <my_product_secrets> secret.
 ----
 
 1. From the OpenShift Container Platform web console, select the ConfigMaps tab.
@@ -102,7 +102,7 @@ To install dynamic plugins in Developer Hub using Helm, add the following global
 * plugins: the dynamic plugins list intended for installation. By default, the list is empty. You can populate the plugins list with the following fields:
 * package: a package specification for the dynamic plugin package that you want to install. You can use a package for either a local or an external dynamic plugin installation. For a local installation, use a path to the local folder containing the dynamic plugin. For an external installation, use a package specification from a public NPM repository.
 * integrity (required for external packages): an integrity checksum in the form of <alg>-<digest> specific to the package. Supported algorithms include sha256, sha384 and sha512.
-* pluginConfig: an optional plugin-specific app-config YAML fragment. See plugin configuration for more information.
+* pluginConfig: an optional plugin-specific app-config.yaml YAML fragment. See plugin configuration for more information.
 * disabled: disables the dynamic plugin if set to true. Default: false.
 * includes: a list of YAML files utilizing the same syntax.
 
@@ -170,14 +170,14 @@ You can install external plugins in an air-gapped environment by setting up a cu
 
 You can configure the NPM registry URL and authentication information for dynamic plugin packages using a Helm chart. For dynamic plugin packages obtained through npm pack, you can use a .npmrc file.
 
-Using the Helm chart, add the .npmrc file to the NPM registry by creating a secret named dynamic-plugins-npmrc with the following content:
+Using the Helm chart, add the .npmrc file to the NPM registry by creating a secret. For example:
 
 
 ```yaml
 apiVersion: v1
 kind: Secret
 metadata:
-  name: dynamic-plugins-npmrc
+  name: <release_name>-dynamic-plugins-npmrc 1
 type: Opaque
 stringData:
   .npmrc: |
@@ -186,6 +186,8 @@ stringData:
           ...
 ```
 
+
+Replace <release_name> with your Helm release name. This name is a unique identifier for each chart installation in the Kubernetes cluster.
 
 # Third-party plugins in Red Hat Developer Hub
 
@@ -208,7 +210,7 @@ To use plugins in Red Hat Developer Hub, you can export plugins as derived dynam
 * Node.js and NPM is installed and configured.
 * The third-party plugin is compatible with your Red Hat Developer Hub version. For more information, see Version compatibility matrix.
 * The third-party plugin must have a valid package.json file in its root directory, containing all required metadata and dependencies.
-Backend plugins::
+Backend plugins:: 
 
 To ensure compatibility with the dynamic plugin support and enable their use as dynamic plugins, existing backend plugins must be compatible with the new Backstage backend system. Additionally, these plugins must be rebuilt using a dedicated CLI command.
 
@@ -237,7 +239,7 @@ npx @janus-idp/cli@latest export-dynamic-plugin --shared-package '!/@backstage/p
 In the previous example:
 * @backstage/plugin-notifications package is treated as a private dependency and is bundled in the dynamic plugin package, despite being in the @backstage scope.
 * @backstage/plugin-notifications-backend package is marked as an embedded dependency and is bundled in the dynamic plugin package.
-Front-end plugins::
+Front-end plugins:: 
 
 Front-end plugins can use scalprum for configuration, which the CLI can generate automatically during the export process. The generated default configuration is logged when running the following command:
 Example command to log the default configuration
@@ -515,14 +517,14 @@ registry=<registry-url>
 //<registry-url>:_authToken=<auth-token>
 ```
 4. When using OpenShift Container Platform or Kubernetes:
-* Create a secret with the .npmrc content as follows:
+* Use the Helm chart to add the .npmrc file by creating a secret. For example:
 Example secret configuration
 
 ```yaml
 apiVersion: v1
 kind: Secret
 metadata:
-  name: dynamic-plugins-npmrc
+  name: <release_name>-dynamic-plugins-npmrc 1
 type: Opaque
 stringData:
   .npmrc: |
@@ -530,9 +532,10 @@ stringData:
     //<registry-url>:_authToken=<auth-token>
 ```
 
+Replace <release_name> with your Helm release name. This name is a unique identifier for each chart installation in the Kubernetes cluster.
 * For RHDH Helm chart, name the secret using the following format for automatic mounting:
 
-<release-name>-dynamic-plugins-npmrc
+<release_name>-dynamic-plugins-npmrc
 5. To apply the changes, restart the RHDH application.
 
 #### Example of installing a third-party plugin in Red Hat Developer Hub

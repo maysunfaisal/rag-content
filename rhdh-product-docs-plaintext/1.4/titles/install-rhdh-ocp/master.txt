@@ -1,11 +1,11 @@
 # Installing Red Hat Developer Hub on OpenShift Container Platform
 
 You can install Red Hat Developer Hub on OpenShift Container Platform by using one of the following installers:
-The Red Hat Developer Hub Operator::
+The Red Hat Developer Hub Operator:: 
 * Ready for immediate use in OpenShift Container Platform after an administrator installs it with OperatorHub
 * Uses Operator Lifecycle Management (OLM) to manage automated subscription updates on OpenShift Container Platform
 * Requires preinstallation of Operator Lifecycle Management (OLM) to manage automated subscription updates on Kubernetes
-The Red Hat Developer Hub Helm chart::
+The Red Hat Developer Hub Helm chart:: 
 * Ready for immediate use in both OpenShift Container Platform and Kubernetes
 * Requires manual installation and management
 Use the installation method that best meets your needs and preferences.

@@ -7,15 +7,15 @@ RHDH integrates software templates, pre-designed solutions, and dynamic plugins 
 
 Red Hat Developer Hub offers targeted benefits for developers, platform engineers, and organizations by simplifying workflows, improving productivity, and enabling efficient governance.
 
-For developers::
+For developers:: 
 * Simplified access to tools, resources, and workflows through a centralized dashboard.
 * Self-service capabilities with guardrails for cloud-native development.
 * Streamlined software and service creation using pre-configured templates.
-For Platform engineers::
+For Platform engineers:: 
 * Tailored platforms with curated tools to support developers efficiently.
 * Centralized repositories for consistent configuration management.
 * Simplified governance of technology choices and operational processes.
-For organizations::
+For organizations:: 
 * Scalability to onboard new teams quickly while maintaining consistency.
 * Enhanced security with enterprise-grade Role-Based Access Control (RBAC).
 * Cost and time efficiency by mitigating cognitive load and eliminating workflow bottlenecks.

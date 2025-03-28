@@ -32,15 +32,123 @@ Topics:
   - Name: About Red Hat Developer Hub
     File: master
     WebpageID: about_red_hat_developer_hub
+- Name: Audit Log
+  Dir: audit-log
+  Topics:
+  - Name: Tracking user activities, system events, and data changes with Red Hat Developer Hub audit logs
+    File: master
+    WebpageID: audit_log
+- Name: Authentication
+  Dir: authentication
+  Topics:
+  - Name: Configuring authentication to external services in Red Hat Developer Hub
+    File: master
+    WebpageID: authentication
+- Name: Authorization
+  Dir: authorization
+  Topics:
+  - Name: Configuring authorization by using role based access control (RBAC) in Red Hat Developer Hub
+    File: master
+    WebpageID: authorization
+- Name: Configuring
+  Dir: configuring
+  Topics:
+  - Name: Configuring Red Hat Developer Hub
+    File: master
+    WebpageID: configuring
+- Name: Customizing
+  Dir: customizing
+  Topics:
+  - Name: Customizing Red Hat Developer Hub
+    File: master
+    WebpageID: customizing
+- Name: Install RHDH in air-gapped environment
+  Dir: install-rhdh-air-gapped
+  Topics:
+  - Name: Installing Red Hat Developer Hub in an air-gapped environment
+    File: master
+    WebpageID: installing_red_hat_developer_hub_in_an_air-gapped_environment
+- Name: Install RHDH on AKS
+  Dir: install-rhdh-aks
+  Topics:
+  - Name: Installing Red Hat Developer Hub on Microsoft Azure Kubernetes Service
+    File: master
+    WebpageID: installing_red_hat_developer_hub_on_microsoft_azure_kubernetes_service
+- Name: Install RHDH on EKS
+  Dir: install-rhdh-eks
+  Topics:
+  - Name: Installing Red Hat Developer Hub on Amazon Elastic Kubernetes Service
+    File: master
+    WebpageID: installing_red_hat_developer_hub_on_amazon_elastic_kubernetes_service
+- Name: Install RHDH on GKE
+  Dir: install-rhdh-gke
+  Topics:
+  - Name: Installing Red Hat Developer Hub on Google Kubernetes Engine
+    File: master
+    WebpageID: installing_red_hat_developer_hub_on_google_kubernetes_engine
 - Name: Install RHDH on OCP
   Dir: install-rhdh-ocp
   Topics:
   - Name: Installing Red Hat Developer Hub on OpenShift Container Platform
     File: master
     WebpageID: installing_red_hat_developer_hub_on_openshift_container_platform
+- Name: Installing RHDH on OSD GCP
+  Dir: install-rhdh-osd-gcp
+  Topics:
+  - Name: Installing Red Hat Developer Hub on OpenShift Dedicated on Google Cloud Platform
+    File: master
+    WebpageID: installing_red_hat_developer_hub_on_openshift_dedicated_on_google_cloud_platform
+- Name: Monitoring and Logging
+  Dir: monitoring-and-logging
+  Topics:
+  - Name: Tracking performance and capturing insights with monitoring and logging tools in Red Hat Developer Hub
+    File: master
+    WebpageID: monitoring_and_logging
+- Name: About Plugins
+  Dir: plugins-rhdh-about
+  Topics:
+  - Name: Introduction to plugins
+    File: master
+    WebpageID: introduction_to_plugins
+- Name: Configure Plugins
+  Dir: plugins-rhdh-configure
+  Topics:
+  - Name: Configuring dynamic plugins
+    File: master
+    WebpageID: configuring_dynamic_plugins
 - Name: Installing Plugins in RHDH
   Dir: plugins-rhdh-install
   Topics:
   - Name: Installing and viewing plugins in Red Hat Developer Hub
     File: master
     WebpageID: installing_and_viewing_plugins_in_red_hat_developer_hub
+- Name: Dynamic Plugin Reference
+  Dir: plugins-rhdh-reference
+  Topics:
+  - Name: Dynamic plugins reference
+    File: master
+    WebpageID: dynamic_plugins_reference
+- Name: Using Dynamic Plugins
+  Dir: plugins-rhdh-using
+  Topics:
+  - Name: Using dynamic plugins
+    File: master
+    WebpageID: using_dynamic_plugins
+- Name: Release Notes
+  Dir: rel-notes-rhdh
+  Topics:
+  - Name: Release Notes
+    File: master
+    WebpageID: release_notes
+- Name: Telemetry
+  Dir: telemetry
+  Topics:
+  - Name: Collecting and analyzing telemetry data to enhance Red Hat Developer Hub experience
+    File: master
+    WebpageID: telemetry_data_collection
+- Name: Upgrading Red Hat Developer Hub
+  Dir: upgrade-rhdh
+  Topics:
+  - Name: Upgrading Red Hat Developer Hub
+    File: master
+    WebpageID: upgrading_red_hat_developer_hub

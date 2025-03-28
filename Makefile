@@ -52,7 +52,7 @@ build-image-ocp-example: build-base-image ## Build a rag-content container image
 	podman build -t rag-content -f examples/Containerfile.ocp_lightspeed --build-arg FLAVOR=$(TORCH_GROUP) --build-arg NUM_WORKERS=$(NUM_WORKERS) .
 
 build-image-rhdh-example: build-base-image ## Build a rag-content container image
-	podman build -t quay.io/maysunfaisal/rag-content:poc2 -f examples/Containerfile.rhdh_lightspeed --build-arg FLAVOR=$(TORCH_GROUP) .
+	podman build -t quay.io/maysunfaisal/rag-content:poc2-full -f examples/Containerfile.rhdh_lightspeed --build-arg FLAVOR=$(TORCH_GROUP) .
 
 build-base-image: ## Build base container image
 	podman build -t $(TORCH_GROUP)-road-core-base -f Containerfile.base --build-arg FLAVOR=$(TORCH_GROUP)
